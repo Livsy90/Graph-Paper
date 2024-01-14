@@ -18,13 +18,13 @@ struct ContentView: View {
             Spacer()
             
             PhotosPicker(selection: $selectedItem, matching: .images) {
-                Label("Select an image", systemImage: "photo")
+                Label(Strings.selectAnImage, systemImage: "photo")
             }
             .tint(.purple)
             .controlSize(.large)
             .buttonStyle(.borderedProminent)
             
-            Text("Tap on the image to save it to the album")
+            Text(Strings.tapToSave)
                 .font(.callout)
                 .multilineTextAlignment(.center)
                 .opacity(captionOpacity)

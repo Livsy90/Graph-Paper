@@ -19,7 +19,7 @@ struct ImageWithGridOverlayView: View {
             .frame(maxWidth: .infinity)
             .scaledToFit()
             .overlay {
-                Image("grid")
+                Image(.graphPaper)
                     .resizable()
                     .frame(maxWidth: .infinity)
                     .scaledToFill()
@@ -32,7 +32,7 @@ struct ImageWithGridOverlayView: View {
                 
                 ImageSaver.saveToPhotoAlbum(view: self, scale: displayScale)
             }
-            .alert("Done 👌", isPresented: $isShowAlert) {}
+            .alert("\(Strings.done) 👌", isPresented: $isShowAlert) {}
     }
 }
 

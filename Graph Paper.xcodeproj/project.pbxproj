@@ -7,15 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D6DDC6532B53D53100020D20 /* Graph_PaperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6DDC6522B53D53100020D20 /* Graph_PaperApp.swift */; };
+		D63E64CF2B53D6AF0022C051 /* ImageWithGridOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63E64CE2B53D6AF0022C051 /* ImageWithGridOverlayView.swift */; };
+		D63E64D12B53D6C70022C051 /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63E64D02B53D6C70022C051 /* ImageSaver.swift */; };
+		D6DDC6532B53D53100020D20 /* GraphPaperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6DDC6522B53D53100020D20 /* GraphPaperApp.swift */; };
 		D6DDC6552B53D53100020D20 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6DDC6542B53D53100020D20 /* ContentView.swift */; };
 		D6DDC6572B53D53600020D20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6DDC6562B53D53600020D20 /* Assets.xcassets */; };
 		D6DDC65A2B53D53600020D20 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6DDC6592B53D53600020D20 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D63E64CE2B53D6AF0022C051 /* ImageWithGridOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWithGridOverlayView.swift; sourceTree = "<group>"; };
+		D63E64D02B53D6C70022C051 /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		D6DDC64F2B53D53100020D20 /* Graph Paper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Graph Paper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6DDC6522B53D53100020D20 /* Graph_PaperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph_PaperApp.swift; sourceTree = "<group>"; };
+		D6DDC6522B53D53100020D20 /* GraphPaperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPaperApp.swift; sourceTree = "<group>"; };
 		D6DDC6542B53D53100020D20 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D6DDC6562B53D53600020D20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D6DDC6592B53D53600020D20 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -32,6 +36,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D63E64CC2B53D6160022C051 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D6DDC6542B53D53100020D20 /* ContentView.swift */,
+				D63E64CE2B53D6AF0022C051 /* ImageWithGridOverlayView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D63E64CD2B53D61B0022C051 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				D63E64D02B53D6C70022C051 /* ImageSaver.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		D6DDC6462B53D53100020D20 = {
 			isa = PBXGroup;
 			children = (
@@ -51,8 +72,9 @@
 		D6DDC6512B53D53100020D20 /* Graph Paper */ = {
 			isa = PBXGroup;
 			children = (
-				D6DDC6522B53D53100020D20 /* Graph_PaperApp.swift */,
-				D6DDC6542B53D53100020D20 /* ContentView.swift */,
+				D63E64CD2B53D61B0022C051 /* Manager */,
+				D63E64CC2B53D6160022C051 /* View */,
+				D6DDC6522B53D53100020D20 /* GraphPaperApp.swift */,
 				D6DDC6562B53D53600020D20 /* Assets.xcassets */,
 				D6DDC6582B53D53600020D20 /* Preview Content */,
 			);
@@ -138,7 +160,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6DDC6552B53D53100020D20 /* ContentView.swift in Sources */,
-				D6DDC6532B53D53100020D20 /* Graph_PaperApp.swift in Sources */,
+				D63E64CF2B53D6AF0022C051 /* ImageWithGridOverlayView.swift in Sources */,
+				D6DDC6532B53D53100020D20 /* GraphPaperApp.swift in Sources */,
+				D63E64D12B53D6C70022C051 /* ImageSaver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +299,7 @@
 				DEVELOPMENT_TEAM = GWLC7B32AQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -304,6 +329,7 @@
 				DEVELOPMENT_TEAM = GWLC7B32AQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

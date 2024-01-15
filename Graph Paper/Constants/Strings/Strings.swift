@@ -10,17 +10,22 @@ import Foundation
 enum Strings {
     static let done = String(
         localized: "Done",
-        defaultValue: "Done",
-        comment: ""
+        defaultValue: "Done"
     )
     static let selectAnImage = String(
         localized: "Select an image",
-        defaultValue: "Select an image",
-        comment: ""
+        defaultValue: "Select an image"
     )
-    static let tapToSave = String(
-        localized: "Tap on the image to save it to the album",
-        defaultValue: "Tap on the image to save it to the album",
-        comment: ""
+    static let save = String(
+        localized: "Save",
+        defaultValue: "Tap on the image to save it to the album"
+    )
+    static let gridSize = String(
+        localized: "Grid size",
+        defaultValue: "Grid size"
+    )
+    static let openPhotos = String(
+        localized: "Open Photos App",
+        defaultValue: "Open Photos App"
     )
 }

@@ -7,40 +7,21 @@
 
 import SwiftUI
 
-struct ImageSaver {
-    
-    private init() {}
+final class ImageSaver: NSObject {
+        
+    private var completion: (() -> Void)?
     
     @MainActor
-    static func saveToPhotoAlbum(view: some View, scale: CGFloat) {
-        let uiImage: UIImage?
+    func saveToPhotoAlbum(view: some View, scale: CGFloat, _ completion: (() -> Void)?) {
+        guard let uiImage = view.render(scale: scale) else { return }
         
-        if #available(iOS 16, *) {
-            uiImage = view.render(scale: scale)
-        } else {
-            uiImage = view.snapshot()
-        }
-        
-        guard let uiImage else { return }
-        UIImageWriteToSavedPhotosAlbum(uiImage, self, nil, nil)
+        self.completion = completion
+        UIImageWriteToSavedPhotosAlbum(uiImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
-}
-
-fileprivate extension View {
-    @MainActor
-    func snapshot() -> UIImage {
-        let controller = UIHostingController(rootView: self)
-        let view = controller.view
-        
-        let targetSize = controller.view.intrinsicContentSize
-        view?.bounds = CGRect(origin: .zero, size: targetSize)
-        view?.backgroundColor = .clear
-        
-        let renderer = UIGraphicsImageRenderer(size: targetSize)
-        
-        return renderer.image { _ in
-            view?.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
-        }
+    
+    @objc
+    private func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+        completion?()
     }
 }
 
@@ -49,7 +30,6 @@ fileprivate extension View {
     @MainActor
     func render(scale displayScale: CGFloat = 1.0) -> UIImage? {
         let renderer = ImageRenderer(content: self)
-
         renderer.scale = displayScale
         
         return renderer.uiImage

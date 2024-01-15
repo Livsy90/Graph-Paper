@@ -12,6 +12,7 @@
 		D6A24FEF2B53DC950013E18D /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D6A24FEE2B53DC950013E18D /* Localizable.xcstrings */; };
 		D6A24FF22B53DEDC0013E18D /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A24FF12B53DEDC0013E18D /* Strings.swift */; };
 		D6A24FF62B53DFBF0013E18D /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A24FF52B53DFBF0013E18D /* Images.swift */; };
+		D6B892812B55AAFC005750FC /* ScaleValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B892802B55AAFC005750FC /* ScaleValue.swift */; };
 		D6DDC6532B53D53100020D20 /* GraphPaperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6DDC6522B53D53100020D20 /* GraphPaperApp.swift */; };
 		D6DDC6552B53D53100020D20 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6DDC6542B53D53100020D20 /* ContentView.swift */; };
 		D6DDC6572B53D53600020D20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6DDC6562B53D53600020D20 /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 		D6A24FEE2B53DC950013E18D /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		D6A24FF12B53DEDC0013E18D /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		D6A24FF52B53DFBF0013E18D /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		D6B892802B55AAFC005750FC /* ScaleValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleValue.swift; sourceTree = "<group>"; };
 		D6DDC64F2B53D53100020D20 /* Graph Paper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Graph Paper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6DDC6522B53D53100020D20 /* GraphPaperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPaperApp.swift; sourceTree = "<group>"; };
 		D6DDC6542B53D53100020D20 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -84,6 +86,14 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		D6B8927F2B55AAF3005750FC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D6B892802B55AAFC005750FC /* ScaleValue.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		D6DDC6462B53D53100020D20 = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +114,7 @@
 		D6DDC6512B53D53100020D20 /* Graph Paper */ = {
 			isa = PBXGroup;
 			children = (
+				D6B8927F2B55AAF3005750FC /* Model */,
 				D6A24FF32B53DF8D0013E18D /* Constants */,
 				D63E64CD2B53D61B0022C051 /* Manager */,
 				D63E64CC2B53D6160022C051 /* View */,
@@ -195,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6B892812B55AAFC005750FC /* ScaleValue.swift in Sources */,
 				D6DDC6552B53D53100020D20 /* ContentView.swift in Sources */,
 				D6A24FF62B53DFBF0013E18D /* Images.swift in Sources */,
 				D63E64CF2B53D6AF0022C051 /* ImageWithGridOverlayView.swift in Sources */,

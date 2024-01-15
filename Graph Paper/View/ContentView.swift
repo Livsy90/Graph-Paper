@@ -50,7 +50,7 @@ struct ContentView: View {
                 
                 Slider(
                     value: $gridSize,
-                    in: 10...1000,
+                    in: 10...200,
                     step: 10
                 )
                 .padding(.bottom)

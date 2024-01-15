@@ -9,7 +9,7 @@ import SwiftUI
 import PhotosUI
 
 struct ContentView: View {
-    @State private var image: Image?
+    @State private var image: UIImage?
     @State private var selectedItem: PhotosPickerItem?
     @State private var captionOpacity: CGFloat = .zero
     
@@ -36,7 +36,10 @@ struct ContentView: View {
         }
         .onChange(of: selectedItem) {
             Task {
-                let image = try? await selectedItem?.loadTransferable(type: Image.self)
+                guard let data = try? await selectedItem?.loadTransferable(type: Data.self),
+                      let image = UIImage(data: data)
+                else { return }
+                
                 withAnimation {
                     captionOpacity = 1
                     self.image = image

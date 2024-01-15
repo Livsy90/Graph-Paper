@@ -9,33 +9,29 @@ import SwiftUI
 
 struct ImageWithGridOverlayView: View {
     
-    @Binding var image: Image?
+    @Binding var image: UIImage?
     @State private var isShowAlert = false
     @Environment(\.displayScale) private var displayScale
     
     var body: some View {
-        image?
-            .resizable()
-            .frame(maxWidth: .infinity)
-            .scaledToFit()
-            .overlay {
-                Image(.graphPaper)
-                    .resizable()
-                    .frame(maxWidth: .infinity)
-                    .scaledToFill()
-            }
-            .onTapGesture {
-                guard image != nil else { return }
-                DispatchQueue.main.async {
-                    isShowAlert.toggle()
+        if let image {
+            Image(uiImage: image)
+                .resizable()
+                .frame(maxWidth: .infinity)
+                .scaledToFit()
+                .overlay {
+                    Image(.graphPaper)
+                        .resizable(resizingMode: .tile)
+                        .frame(maxWidth: .infinity)
                 }
-                
-                ImageSaver.saveToPhotoAlbum(view: self, scale: displayScale)
-            }
-            .alert("\(Strings.done) 👌", isPresented: $isShowAlert) {}
+                .onTapGesture {
+                    DispatchQueue.main.async {
+                        isShowAlert.toggle()
+                    }
+                    
+                    ImageSaver.saveToPhotoAlbum(view: self, scale: displayScale)
+                }
+                .alert("\(Strings.done) 👌", isPresented: $isShowAlert) {}
+        }
     }
-}
-
-#Preview {
-    ImageWithGridOverlayView(image: .constant(Image(systemName: "heart")))
 }

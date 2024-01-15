@@ -8,5 +8,5 @@
 import DeveloperToolsSupport
 
 extension DeveloperToolsSupport.ImageResource {
-    static let graphPaper = DeveloperToolsSupport.ImageResource(name: "grid", bundle: .main)
+    static let graphPaper = DeveloperToolsSupport.ImageResource(name: "graph", bundle: .main)
 }

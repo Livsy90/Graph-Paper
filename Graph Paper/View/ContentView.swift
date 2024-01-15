@@ -53,7 +53,7 @@ struct ContentView: View {
                     in: 10...200,
                     step: 10
                 )
-                .padding(.bottom)
+                .padding([.bottom, .horizontal])
             }
             .opacity(sliderOpacity)
             .onChange(of: didSave) { _, _ in

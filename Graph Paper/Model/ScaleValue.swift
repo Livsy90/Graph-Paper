@@ -11,7 +11,7 @@ enum ScaleValue: Double {
     case small = 0.5
     
     static func getValue(from value: Double) -> ScaleValue {
-        if value > 1000.0 && value < 2000 {
+        if value > 1000 && value < 2000 {
             .medium
         } else if value < 1000 {
             .small

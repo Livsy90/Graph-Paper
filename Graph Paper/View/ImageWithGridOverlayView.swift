@@ -68,7 +68,7 @@ struct ImageWithGridOverlayView: View {
     @ViewBuilder
     private func gridView() -> some View {
         let size = CGSize(width: sideSize, height: sideSize)
-        let image = UIImage(resource: .graphPaper).resized(to: size)
+        let image = UIImage(resource: .graph).resized(to: size)
         Image(uiImage: image)
             .resizable(resizingMode: .tile)
     }

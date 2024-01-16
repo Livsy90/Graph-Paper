@@ -98,6 +98,22 @@
         }
       }
     },
+    "Image Settings" : {
+      "localizations" : {
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Պատկերի կարգավորումներ"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Настройки изображения"
+          }
+        }
+      }
+    },
     "OK" : {
 
     },

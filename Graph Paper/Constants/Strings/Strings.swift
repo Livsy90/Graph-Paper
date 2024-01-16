@@ -36,4 +36,8 @@ enum Strings {
         localized: "Open Photos App",
         defaultValue: "Open Photos App"
     )
+    static let imageSettings = String(
+        localized: "Image Settings",
+        defaultValue: "Image Settings"
+    )
 }

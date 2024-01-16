@@ -80,6 +80,8 @@ struct ImageWithGridOverlayView: View {
         let image = UIImage(resource: .graph).resized(to: .init(width: actualSideSize, height: actualSideSize))
         Image(uiImage: image)
             .resizable(resizingMode: .tile)
+            .renderingMode(.template)
+            .foregroundColor(patternColor)
     }
     
     @ViewBuilder

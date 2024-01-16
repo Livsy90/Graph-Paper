@@ -14,61 +14,14 @@ struct ContentView: View {
     @State private var patternElementSideSize: CGFloat = 50
     @State private var didSave: Bool = false
     @State private var selectedItem: PhotosPickerItem?
-    @State private var saveButtonOpacity: CGFloat = .zero
-    @State private var sliderOpacity: CGFloat = .zero
+    @State private var isButtonsDisabled: Bool = false
+    @State private var additionalUiOpacity: CGFloat = .zero
     @State private var patternColor: Color = .black
     
     var body: some View {
         VStack {
             Spacer()
-            
-            PhotosPicker(selection: $selectedItem, matching: .images) {
-                Label(Strings.selectAnImage, systemImage: "photo")
-            }
-            .tint(.purple)
-            .controlSize(.large)
-            .buttonStyle(.borderedProminent)
-            .padding()
-            
-            Button {
-                didSave.toggle()
-            } label: {
-                Label(Strings.save, systemImage: "tray.and.arrow.down")
-            }
-            .opacity(saveButtonOpacity)
-            .tint(.green)
-            .controlSize(.large)
-            .buttonStyle(.borderedProminent)
-            .padding()
-            
-            Divider()
-                .opacity(saveButtonOpacity)
-                .padding([.bottom, .horizontal])
-            
-            VStack {
-                HStack {
-                    Spacer()
-                    Text(Strings.gridColor)
-                    ColorPicker("", selection: $patternColor)
-                        .labelsHidden()
-                    Spacer()
-                }
-                .padding(.bottom)
-                
-                Text(Strings.gridSize)
-                Slider(
-                    value: $patternElementSideSize,
-                    in: 10...150,
-                    step: 10
-                )
-                .padding(.horizontal)
-            }
-            .opacity(sliderOpacity)
-            .onChange(of: didSave) { _, _ in
-                sliderOpacity = 0
-            }
-            .padding(.bottom)
-            
+        
             ImageWithGridOverlayView(
                 image: $image,
                 didSave: $didSave,
@@ -76,11 +29,72 @@ struct ContentView: View {
                 patternColor: $patternColor
             ) {
                 withAnimation {
-                    sliderOpacity = 1
+                    isButtonsDisabled = false
+                    additionalUiOpacity = 1
                 }
             }
             
-            Spacer()
+            Label("\(Strings.size): \(Int(image?.size.width ?? 0)) / \(Int(image?.size.height ?? 0))", systemImage: "arrow.up.left.and.arrow.down.right")
+                .multilineTextAlignment(.leading)
+                .opacity(additionalUiOpacity)
+            
+            
+            Divider()
+                .opacity(additionalUiOpacity)
+                .padding()
+            
+            VStack {
+                
+                HStack {
+                    Label("\(Strings.gridSize): ", systemImage: "paintbrush.fill")
+                        .multilineTextAlignment(.leading)
+                    ColorPicker("", selection: $patternColor)
+                        .labelsHidden()
+                    Spacer()
+                }
+                
+                HStack {
+                    Label("\(Strings.gridSize): \(Int(patternElementSideSize))", systemImage: "rectangle.split.3x3.fill")
+                        .multilineTextAlignment(.leading)
+                    Spacer()
+                }
+                
+                Slider(
+                    value: $patternElementSideSize,
+                    in: 10...150,
+                    step: 1
+                )
+                .padding(.horizontal)
+                .accentColor(.purple)
+            }
+            .opacity(additionalUiOpacity)
+            
+            Divider()
+                .opacity(additionalUiOpacity)
+                .padding()
+            
+            Button {
+                didSave.toggle()
+            } label: {
+                Label(Strings.save, systemImage: "tray.and.arrow.down")
+                    .frame(maxWidth: .infinity)
+            }
+            .disabled(isButtonsDisabled)
+            .tint(.green)
+            .opacity(additionalUiOpacity)
+            .controlSize(.large)
+            .buttonStyle(.borderedProminent)
+            .padding(.horizontal)
+            
+            PhotosPicker(selection: $selectedItem, matching: .images) {
+                Label(Strings.selectAnImage, systemImage: "photo")
+                    .frame(maxWidth: .infinity)
+            }
+            .disabled(isButtonsDisabled)
+            .tint(.purple)
+            .controlSize(.large)
+            .buttonStyle(.borderedProminent)
+            .padding([.bottom, .horizontal])
         }
         .onChange(of: selectedItem) {
             Task {
@@ -89,13 +103,17 @@ struct ContentView: View {
                 else { return }
                 
                 withAnimation {
-                    saveButtonOpacity = 1
-                    sliderOpacity = 1
+                    additionalUiOpacity = 1
                     self.image = image
                 }
             }
         }
+        .onChange(of: didSave) { _, _ in
+            isButtonsDisabled = true
+            additionalUiOpacity = 0
+        }
     }
+    
 }
 
 #Preview {

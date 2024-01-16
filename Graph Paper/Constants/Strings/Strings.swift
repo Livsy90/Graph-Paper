@@ -28,6 +28,10 @@ enum Strings {
         localized: "Grid Color",
         defaultValue: "Grid Color"
     )
+    static let size = String(
+        localized: "Size",
+        defaultValue: "Size"
+    )
     static let openPhotos = String(
         localized: "Open Photos App",
         defaultValue: "Open Photos App"

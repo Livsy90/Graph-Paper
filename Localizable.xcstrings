@@ -7,6 +7,29 @@
     "%@ 👌" : {
 
     },
+    "%@: " : {
+
+    },
+    "%@: %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@: %2$lld"
+          }
+        }
+      }
+    },
+    "%@: %lld / %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@: %2$lld / %3$lld"
+          }
+        }
+      }
+    },
     "Done" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -141,7 +164,23 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Выберите изображение"
+            "value" : "Выбрать изображение"
+          }
+        }
+      }
+    },
+    "Size" : {
+      "localizations" : {
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Չափը"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Размер"
           }
         }
       }

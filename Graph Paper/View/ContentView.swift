@@ -102,7 +102,7 @@ struct ContentView: View {
             Image(systemName: "photo.fill.on.rectangle.fill")
                 .renderingMode(.template)
                 .foregroundColor(.purple)
-                .opacity(additionalUiOpacity == 0 ? 1 : 0)
+                .opacity(image == nil ? 1 : 0)
                 .font(.system(size: 150))
 
         }

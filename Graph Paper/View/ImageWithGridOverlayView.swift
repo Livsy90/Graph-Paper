@@ -18,6 +18,7 @@ struct ImageWithGridOverlayView: View {
     
     @State private var isShowAlert = false
     @State private var progressViewOpacity: CGFloat = 0
+    @State private var showPreview = false
     
     @Environment(\.displayScale) private var displayScale
     private let imageSaver = ImageSaver()
@@ -26,12 +27,13 @@ struct ImageWithGridOverlayView: View {
         
         ZStack {
             if let image {
-                imageView(image)
-                    .overlay {
-                        gridView()
-                    }.onChange(of: didSave, { _, _ in
+                overlayedImage(image)
+                    .onChange(of: didSave, { _, _ in
                         save()
                     })
+                    .onTapGesture {
+                        showPreview.toggle()
+                    }
                     .alert("\(Strings.done) 👌", isPresented: $isShowAlert) {
                         Button {
                             UIApplication.shared.open(URL(string:"photos-redirect://")!)
@@ -45,13 +47,25 @@ struct ImageWithGridOverlayView: View {
                             Text("OK")
                         }
                     }
+                    .sheet(isPresented: $showPreview) {
+                        overlayedImage(image)
+                    }
             }
             
             progresView()
         }
     }
     
-    @ViewBuilder func progresView() -> some View {
+    @ViewBuilder
+    private func overlayedImage(_ image: UIImage) -> some View {
+        imageView(image)
+            .overlay {
+                gridView()
+            }
+    }
+    
+    @ViewBuilder
+    private func progresView() -> some View {
         ProgressView()
             .padding()
             .scaleEffect(5)

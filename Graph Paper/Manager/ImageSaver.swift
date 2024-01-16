@@ -21,6 +21,9 @@ final class ImageSaver: NSObject {
     
     @objc
     private func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+        if let error {
+            print(error.localizedDescription)
+        }
         completion?()
     }
 }
@@ -34,6 +37,5 @@ fileprivate extension View {
         
         return renderer.uiImage
     }
-    
 }
 

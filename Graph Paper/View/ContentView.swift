@@ -11,7 +11,7 @@ import PhotosUI
 struct ContentView: View {
     
     @State private var image: UIImage?
-    @State private var gridSize: CGFloat = 50
+    @State private var patternElementSideSize: CGFloat = 50
     @State private var didSave: Bool = false
     @State private var selectedItem: PhotosPickerItem?
     @State private var saveButtonOpacity: CGFloat = .zero
@@ -49,7 +49,7 @@ struct ContentView: View {
                 Text(Strings.gridSize)
                 
                 Slider(
-                    value: $gridSize,
+                    value: $patternElementSideSize,
                     in: 10...200,
                     step: 10
                 )
@@ -63,7 +63,7 @@ struct ContentView: View {
             ImageWithGridOverlayView(
                 image: $image,
                 didSave: $didSave,
-                sideSize: $gridSize,
+                patternElementSideSize: $patternElementSideSize,
                 scaleValue: $scaleValue
             ) {
                 withAnimation {

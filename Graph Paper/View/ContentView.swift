@@ -15,25 +15,25 @@ struct ContentView: View {
         case light = 1
         case dark = 2
         
-        var title: String {
-            switch self {
-            case .system:
-                Strings.system
-            case .light:
-                Strings.light
-            case .dark:
-                Strings.dark
-            }
-        }
-        
         var imageName: String {
             switch self {
             case .system:
-                "ellipsis.circle.fill"
+                "sun.haze.fill"
             case .light:
                 "sun.max.fill"
             case .dark:
                 "moon.stars.fill"
+            }
+        }
+        
+        var color: Color {
+            switch self {
+            case .system:
+                    .buttonSecondary
+            case .light:
+                    .orange
+            case .dark:
+                    .purple
             }
         }
     }
@@ -51,22 +51,21 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
+            let appearance = Appearance(rawValue: selectedAppearance) ?? .system
             VStack {
                 HStack {
                     Spacer()
                     
-                    Text(Strings.mode)
-                        .font(.caption2)
-                        .padding(.top)
-                    
                     Button {
                         switchAppearance()
                     } label: {
-                        let appearance = Appearance(rawValue: selectedAppearance) ?? .system
-                        Label(appearance.title, systemImage: appearance.imageName)
+                        Image(systemName: appearance.imageName)
+                            .renderingMode(.template)
+                            .font(.system(size: 18))
+                            .foregroundColor(appearance.color)
                     }
-                    .tint(.buttonSecondary)
-                    .controlSize(.small)
+                    .tint(appearance.color)
+                    .controlSize(.mini)
                     .buttonStyle(.bordered)
                     .padding([.trailing, .top])
                 }

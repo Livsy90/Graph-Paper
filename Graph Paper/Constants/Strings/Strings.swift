@@ -40,20 +40,4 @@ enum Strings {
         localized: "Image Settings",
         defaultValue: "Image Settings"
     )
-    static let mode = String(
-        localized: "Mode",
-        defaultValue: "Mode"
-    )
-    static let dark = String(
-        localized: "Dark",
-        defaultValue: "Dark"
-    )
-    static let light = String(
-        localized: "Light",
-        defaultValue: "Light"
-    )
-    static let system = String(
-        localized: "System",
-        defaultValue: "System"
-    )
 }

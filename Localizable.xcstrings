@@ -30,22 +30,6 @@
         }
       }
     },
-    "Dark" : {
-      "localizations" : {
-        "hy" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Մութ"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Темная"
-          }
-        }
-      }
-    },
     "Done" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -126,38 +110,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Настройки изображения"
-          }
-        }
-      }
-    },
-    "Light" : {
-      "localizations" : {
-        "hy" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Լույս"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Светлая"
-          }
-        }
-      }
-    },
-    "Mode" : {
-      "localizations" : {
-        "hy" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ռեժիմ"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Тема"
           }
         }
       }
@@ -245,22 +197,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Размер"
-          }
-        }
-      }
-    },
-    "System" : {
-      "localizations" : {
-        "hy" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Համակարգ"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Системная"
           }
         }
       }

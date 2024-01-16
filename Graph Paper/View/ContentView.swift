@@ -50,6 +50,7 @@ struct ContentView: View {
                     HStack {
                         Label("\(Strings.gridColor): ", systemImage: "paintbrush.fill")
                             .multilineTextAlignment(.leading)
+                            .padding(.leading)
                         ColorPicker("", selection: $patternColor)
                             .labelsHidden()
                         Spacer()
@@ -58,6 +59,7 @@ struct ContentView: View {
                     HStack {
                         Label("\(Strings.gridSize): \(Int(patternElementSideSize))", systemImage: "rectangle.split.3x3.fill")
                             .multilineTextAlignment(.leading)
+                            .padding(.horizontal)
                         Spacer()
                     }
                     
@@ -67,7 +69,7 @@ struct ContentView: View {
                         step: 1
                     )
                     .padding(.horizontal)
-                    .accentColor(.purple)
+                    .accentColor(.buttonPrimary)
                 }
                 .opacity(additionalUiOpacity)
                 
@@ -80,9 +82,10 @@ struct ContentView: View {
                 } label: {
                     Label(Strings.save, systemImage: "tray.and.arrow.down")
                         .frame(maxWidth: .infinity)
+                        .padding(.horizontal)
                 }
                 .disabled(isButtonsDisabled)
-                .tint(.green)
+                .tint(.buttonSecondary)
                 .opacity(additionalUiOpacity)
                 .controlSize(.large)
                 .buttonStyle(.borderedProminent)
@@ -93,7 +96,7 @@ struct ContentView: View {
                         .frame(maxWidth: .infinity)
                 }
                 .disabled(isButtonsDisabled)
-                .tint(.purple)
+                .tint(.buttonPrimary)
                 .controlSize(.large)
                 .buttonStyle(.borderedProminent)
                 .padding([.bottom, .horizontal])
@@ -101,9 +104,9 @@ struct ContentView: View {
             
             Image(systemName: "photo.fill.on.rectangle.fill")
                 .renderingMode(.template)
-                .foregroundColor(.purple)
+                .foregroundColor(Color.gray.opacity(0.3))
                 .opacity(image == nil ? 1 : 0)
-                .font(.system(size: 150))
+                .font(.system(size: 100))
 
         }
         .onChange(of: selectedItem) {
@@ -122,6 +125,7 @@ struct ContentView: View {
             isButtonsDisabled = true
             additionalUiOpacity = 0
         }
+        .background(Color.background)
     }
     
 }

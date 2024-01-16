@@ -17,6 +17,7 @@ struct ImageWithGridOverlayView: View {
     var onFinishImageSaving: (() -> Void)?
     
     @State private var isShowAlert = false
+    @State private var imageSize: CGSize = .zero
     @State private var progressViewOpacity: CGFloat = 0
     @State private var showPreview = false
     
@@ -68,12 +69,13 @@ struct ImageWithGridOverlayView: View {
     private func progresView() -> some View {
         ProgressView()
             .padding()
-            .scaleEffect(5)
+            .scaleEffect(2)
             .opacity(progressViewOpacity)
+            .tint(.white.opacity(0.9))
             .background(
                 RoundedRectangle(cornerRadius: 16)
-                    .fill(Color.black).opacity(0.5)
-                    .frame(width: 200, height: 200)
+                    .fill(Color.black).opacity(0.8)
+                    .frame(width: 60, height: 60)
                     .opacity(progressViewOpacity)
             )
     }
@@ -90,11 +92,22 @@ struct ImageWithGridOverlayView: View {
     
     @ViewBuilder
     private func gridViewToSave(_ image: UIImage) -> some View {
-        let sideSizeDiff = (UIScreen.width < image.size.width) ? (image.size.width / UIScreen.width) : 1
+        let sideSizeDiff = sizeDiff(image)
         let actualSideSize = patternElementSideSize * sideSizeDiff
         let image = UIImage(resource: .graph).resized(to: .init(width: actualSideSize, height: actualSideSize))
         Image(uiImage: image)
             .resizable(resizingMode: .tile)
+    }
+    
+    @ViewBuilder
+    private func rectReader() -> some View {
+        GeometryReader { geometry -> Color in
+            let imageSize = geometry.size
+            DispatchQueue.main.async {
+                self.imageSize = imageSize
+            }
+            return .clear
+        }
     }
     
     @ViewBuilder
@@ -103,6 +116,7 @@ struct ImageWithGridOverlayView: View {
             .resizable()
             .frame(maxWidth: .infinity)
             .scaledToFit()
+            .background(rectReader())
     }
     
     @ViewBuilder
@@ -126,6 +140,16 @@ struct ImageWithGridOverlayView: View {
             onFinishImageSaving?()
         }
         progressViewOpacity = 1
+    }
+    
+    private func sizeDiff(_ image: UIImage) -> CGFloat {
+        if imageSize.width == UIScreen.width && UIScreen.width < image.size.width {
+            image.size.width / UIScreen.width
+        } else if imageSize.height < image.size.height && UIScreen.width > imageSize.width {
+            image.size.height / imageSize.height
+        } else {
+            1
+        }
     }
     
 }

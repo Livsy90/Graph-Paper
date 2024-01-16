@@ -48,7 +48,7 @@ struct ContentView: View {
                 VStack {
                     
                     HStack {
-                        Label("\(Strings.gridSize): ", systemImage: "paintbrush.fill")
+                        Label("\(Strings.gridColor): ", systemImage: "paintbrush.fill")
                             .multilineTextAlignment(.leading)
                         ColorPicker("", selection: $patternColor)
                             .labelsHidden()

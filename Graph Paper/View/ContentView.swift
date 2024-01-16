@@ -16,7 +16,7 @@ struct ContentView: View {
     @State private var selectedItem: PhotosPickerItem?
     @State private var saveButtonOpacity: CGFloat = .zero
     @State private var sliderOpacity: CGFloat = .zero
-    @State private var scaleValue: ScaleValue = .big
+    @State private var patternColor: Color = .black
     
     var body: some View {
         VStack {
@@ -46,25 +46,34 @@ struct ContentView: View {
                 .padding([.bottom, .horizontal])
             
             VStack {
-                Text(Strings.gridSize)
+                HStack {
+                    Spacer()
+                    Text(Strings.gridColor)
+                    ColorPicker("", selection: $patternColor)
+                        .labelsHidden()
+                    Spacer()
+                }
+                .padding(.bottom)
                 
+                Text(Strings.gridSize)
                 Slider(
                     value: $patternElementSideSize,
-                    in: 10...200,
+                    in: 10...150,
                     step: 10
                 )
-                .padding([.bottom, .horizontal])
+                .padding(.horizontal)
             }
             .opacity(sliderOpacity)
             .onChange(of: didSave) { _, _ in
                 sliderOpacity = 0
             }
+            .padding(.bottom)
             
             ImageWithGridOverlayView(
                 image: $image,
                 didSave: $didSave,
-                patternElementSideSize: $patternElementSideSize,
-                scaleValue: $scaleValue
+                patternElementSideSize: $patternElementSideSize, 
+                patternColor: $patternColor
             ) {
                 withAnimation {
                     sliderOpacity = 1
@@ -83,7 +92,6 @@ struct ContentView: View {
                     saveButtonOpacity = 1
                     sliderOpacity = 1
                     self.image = image
-                    scaleValue = .getValue(from: image.size.width)
                 }
             }
         }

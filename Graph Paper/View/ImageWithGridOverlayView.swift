@@ -12,7 +12,7 @@ struct ImageWithGridOverlayView: View {
     @Binding var image: UIImage?
     @Binding var didSave: Bool
     @Binding var patternElementSideSize: CGFloat
-    @Binding var scaleValue: ScaleValue
+    @Binding var patternColor: Color
     
     var onFinishImageSaving: (() -> Void)?
     
@@ -70,11 +70,13 @@ struct ImageWithGridOverlayView: View {
         let image = UIImage(resource: .graph).resized(to: size)
         Image(uiImage: image)
             .resizable(resizingMode: .tile)
+            .renderingMode(.template)
+            .foregroundColor(patternColor)
     }
     
     @ViewBuilder
     private func gridViewToSave(_ image: UIImage) -> some View {
-        let sideSizeDiff = image.size.width / UIScreen.width
+        let sideSizeDiff = (UIScreen.width < image.size.width) ? (image.size.width / UIScreen.width) : 1
         let actualSideSize = patternElementSideSize * sideSizeDiff
         let image = UIImage(resource: .graph).resized(to: .init(width: actualSideSize, height: actualSideSize))
         Image(uiImage: image)
@@ -109,7 +111,6 @@ struct ImageWithGridOverlayView: View {
             isShowAlert.toggle()
             onFinishImageSaving?()
         }
-       // patternElementSideSize /= CGFloat(scaleValue.rawValue)
         progressViewOpacity = 1
     }
     
@@ -136,7 +137,7 @@ fileprivate extension UIWindow {
 }
 
 
-fileprivate extension UIScreen {
+extension UIScreen {
     static var current: UIScreen? {
         UIWindow.current?.screen
     }

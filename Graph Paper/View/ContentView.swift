@@ -49,9 +49,6 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                Label(Strings.imageSettings, systemImage: "wrench.fill")
-                    .opacity(additionalUiOpacity)
-                
                 ImageWithGridOverlayView(
                     image: $image,
                     didSave: $didSave,

@@ -9,36 +9,8 @@ import SwiftUI
 import PhotosUI
 
 struct ContentView: View {
-    
-    private enum Appearance: Int {
-        case system = 0
-        case light = 1
-        case dark = 2
         
-        var imageName: String {
-            switch self {
-            case .system:
-                "sun.haze.fill"
-            case .light:
-                "sun.max.fill"
-            case .dark:
-                "moon.stars.fill"
-            }
-        }
-        
-        var color: Color {
-            switch self {
-            case .system:
-                    .buttonSecondary
-            case .light:
-                    .orange
-            case .dark:
-                    .purple
-            }
-        }
-    }
-    
-    @AppStorage("selectedAppearance") private var selectedAppearance = UserDefaults.standard.selectedAppearance ?? 0
+    @AppStorage("selectedAppearance") private var selectedAppearance: AppearanceKind = .system
     private var themeManager = ThemeManager()
     
     @State private var image: UIImage?
@@ -51,7 +23,6 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            let appearance = Appearance(rawValue: selectedAppearance) ?? .system
             VStack {
                 HStack {
                     Spacer()
@@ -59,12 +30,12 @@ struct ContentView: View {
                     Button {
                         switchAppearance()
                     } label: {
-                        Image(systemName: appearance.imageName)
+                        Image(systemName: selectedAppearance.imageName)
                             .renderingMode(.template)
                             .font(.system(size: 18))
-                            .foregroundColor(appearance.color)
+                            .foregroundColor(selectedAppearance.color)
                     }
-                    .tint(appearance.color)
+                    .tint(selectedAppearance.color)
                     .controlSize(.mini)
                     .buttonStyle(.bordered)
                     .padding([.trailing, .top])
@@ -73,7 +44,6 @@ struct ContentView: View {
                     themeManager.overrideDisplayMode()
                 }
                 .onAppear {
-                    selectedAppearance = UserDefaults.standard.selectedAppearance ?? 0
                     themeManager.overrideDisplayMode()
                 }
                 
@@ -185,24 +155,42 @@ struct ContentView: View {
     }
     
     private func switchAppearance() {
-        let appearance = Appearance(rawValue: selectedAppearance) ?? .system
-        switch appearance {
+        switch selectedAppearance {
         case .system:
-            setSelectedAppearance(.light)
+            selectedAppearance = .light
         case .light:
-            setSelectedAppearance(.dark)
+            selectedAppearance = .dark
         case .dark:
-            setSelectedAppearance(.system)
+            selectedAppearance = .system
         }
-    }
-    
-    private func setSelectedAppearance(_ value: Appearance) {
-        UserDefaults.standard.selectedAppearance = value.rawValue
-        selectedAppearance = value.rawValue
     }
     
 }
 
 #Preview {
     ContentView()
+}
+
+fileprivate extension AppearanceKind {
+    var imageName: String {
+        switch self {
+        case .system:
+            "sun.haze.fill"
+        case .light:
+            "sun.max.fill"
+        case .dark:
+            "moon.stars.fill"
+        }
+    }
+    
+    var color: Color {
+        switch self {
+        case .system:
+                .buttonSecondary
+        case .light:
+                .orange
+        case .dark:
+                .purple
+        }
+    }
 }

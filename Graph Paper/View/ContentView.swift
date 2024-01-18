@@ -11,15 +11,17 @@ import PhotosUI
 struct ContentView: View {
     
     @AppStorage("selectedAppearance") private var selectedAppearance: AppearanceKind = .system
-    private var themeManager = ThemeManager()
+    @AppStorage("defaultPatternElementSideSize") private var defaultPatternElementSideSize: Int = 40
     
     @State private var image: UIImage?
-    @State private var patternElementSideSize: CGFloat = 50
+    @State private var patternElementSideSize: CGFloat = 40
     @State private var didSave: Bool = false
     @State private var selectedItem: PhotosPickerItem?
     @State private var isButtonsDisabled: Bool = false
     @State private var additionalUiOpacity: CGFloat = .zero
     @State private var patternColor: Color = .black
+    
+    private var themeManager = ThemeManager()
     
     var body: some View {
         ZStack {
@@ -43,7 +45,7 @@ struct ContentView: View {
                     } label: {
                         Image(systemName: selectedAppearance.imageName)
                             .renderingMode(.template)
-                            .font(.system(size: 28))
+                            .font(.system(size: 25))
                             .foregroundColor(selectedAppearance.color)
                     }
                     .padding()
@@ -157,6 +159,12 @@ struct ContentView: View {
             isButtonsDisabled = true
             additionalUiOpacity = 0
         }
+        .onAppear {
+            patternElementSideSize = CGFloat(defaultPatternElementSideSize)
+        }
+        .onChange(of: patternElementSideSize, { _, newValue in
+            defaultPatternElementSideSize = Int(newValue)
+        })
         .background(Color.background)
     }
     

@@ -20,6 +20,7 @@ struct ContentView: View {
     @State private var isButtonsDisabled: Bool = false
     @State private var additionalUiOpacity: CGFloat = .zero
     @State private var patternColor: Color = .black
+    @State private var isEditingGridSize: Bool = false
     
     private var themeManager = ThemeManager()
     
@@ -101,7 +102,9 @@ struct ContentView: View {
                         value: $patternElementSideSize,
                         in: 10...150,
                         step: 1
-                    )
+                    ) { isEditing in
+                        isEditingGridSize = isEditing
+                    }
                     .padding(.horizontal)
                     .accentColor(.buttonPrimary)
                 }
@@ -162,8 +165,9 @@ struct ContentView: View {
         .onAppear {
             patternElementSideSize = CGFloat(defaultPatternElementSideSize)
         }
-        .onChange(of: patternElementSideSize, { _, newValue in
-            defaultPatternElementSideSize = Int(newValue)
+        .onChange(of: isEditingGridSize, { _, newValue in
+            guard !newValue else { return }
+            defaultPatternElementSideSize = Int(patternElementSideSize)
         })
         .background(Color.background)
     }

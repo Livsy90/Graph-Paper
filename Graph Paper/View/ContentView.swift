@@ -9,7 +9,7 @@ import SwiftUI
 import PhotosUI
 
 struct ContentView: View {
-        
+    
     @AppStorage("selectedAppearance") private var selectedAppearance: AppearanceKind = .system
     private var themeManager = ThemeManager()
     
@@ -27,18 +27,27 @@ struct ContentView: View {
                 HStack {
                     Spacer()
                     
-                    Button {
-                        switchAppearance()
+                    Menu {
+                        ForEach(AppearanceKind.allCases) { appearance in
+                            Button {
+                                selectedAppearance = appearance
+                            } label: {
+                                HStack {
+                                    Text(appearance.title)
+                                    Image(systemName: appearance.imageName)
+                                        .renderingMode(.template)
+                                        .foregroundColor(appearance.color)
+                                }
+                            }
+                        }
                     } label: {
                         Image(systemName: selectedAppearance.imageName)
                             .renderingMode(.template)
-                            .font(.system(size: 18))
+                            .font(.system(size: 28))
                             .foregroundColor(selectedAppearance.color)
                     }
-                    .tint(selectedAppearance.color)
-                    .controlSize(.mini)
-                    .buttonStyle(.bordered)
-                    .padding([.trailing, .top])
+                    .padding()
+                    .symbolEffect(.bounce, value: selectedAppearance)
                 }
                 .onChange(of: selectedAppearance) { _, _ in
                     themeManager.overrideDisplayMode()
@@ -151,17 +160,6 @@ struct ContentView: View {
         .background(Color.background)
     }
     
-    private func switchAppearance() {
-        switch selectedAppearance {
-        case .system:
-            selectedAppearance = .light
-        case .light:
-            selectedAppearance = .dark
-        case .dark:
-            selectedAppearance = .system
-        }
-    }
-    
 }
 
 #Preview {
@@ -169,25 +167,27 @@ struct ContentView: View {
 }
 
 fileprivate extension AppearanceKind {
+    var title: String {
+        switch self {
+        case .system: Strings.systemMode
+        case .light: Strings.lightMode
+        case .dark: Strings.darkMode
+        }
+    }
+    
     var imageName: String {
         switch self {
-        case .system:
-            "sun.haze.fill"
-        case .light:
-            "sun.max.fill"
-        case .dark:
-            "moon.stars.fill"
+        case .system: "sun.haze.fill"
+        case .light: "sun.max.fill"
+        case .dark: "moon.stars.fill"
         }
     }
     
     var color: Color {
         switch self {
-        case .system:
-                .buttonSecondary
-        case .light:
-                .orange
-        case .dark:
-                .purple
+        case .system: .buttonSecondary
+        case .light: .orange
+        case .dark: .purple
         }
     }
 }

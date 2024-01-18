@@ -30,6 +30,22 @@
         }
       }
     },
+    "Dark Mode" : {
+      "localizations" : {
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Մութ ռեժիմ"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Темная тема"
+          }
+        }
+      }
+    },
     "Done" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -94,6 +110,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Размер сетки"
+          }
+        }
+      }
+    },
+    "Light Mode" : {
+      "localizations" : {
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Լույսի ռեժիմ"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Светлая тема"
           }
         }
       }
@@ -181,6 +213,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Размер"
+          }
+        }
+      }
+    },
+    "System" : {
+      "localizations" : {
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Համակարգի ռեժիմ"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Системная тема"
           }
         }
       }

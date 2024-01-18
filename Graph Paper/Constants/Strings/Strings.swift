@@ -36,4 +36,16 @@ enum Strings {
         localized: "Open Photos App",
         defaultValue: "Open Photos App"
     )
+    static let darkMode = String(
+        localized: "Dark Mode",
+        defaultValue: "Dark Mode"
+    )
+    static let lightMode = String(
+        localized: "Light Mode",
+        defaultValue: "Light Mode"
+    )
+    static let systemMode = String(
+        localized: "System",
+        defaultValue: "System"
+    )
 }

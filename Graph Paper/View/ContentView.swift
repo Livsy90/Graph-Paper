@@ -28,8 +28,6 @@ struct ContentView: View {
         ZStack {
             VStack {
                 HStack {
-                    Spacer()
-                    
                     Menu {
                         ForEach(AppearanceKind.allCases) { appearance in
                             Button {
@@ -51,6 +49,25 @@ struct ContentView: View {
                     }
                     .padding()
                     .symbolEffect(.bounce, value: selectedAppearance)
+                    
+                    Spacer()
+                    
+                    Button {
+                        withAnimation {
+                            image = nil
+                            selectedItem = nil
+                            additionalUiOpacity = 0
+                        }
+                    } label: {
+                        Image(systemName: "xmark.circle")
+                            .renderingMode(.template)
+                            .font(.system(size: 23))
+                            .foregroundColor(Color.gray.opacity(0.7))
+                    }
+                    .symbolEffect(.bounce, value: image)
+                    .tint(.buttonSecondary)
+                    .padding()
+                    .opacity(additionalUiOpacity)
                 }
                 .onChange(of: selectedAppearance) { _, _ in
                     themeManager.overrideDisplayMode()
@@ -148,7 +165,7 @@ struct ContentView: View {
         }
         .onChange(of: selectedItem) {
             Task {
-                guard let data = try? await selectedItem?.loadTransferable(type: Data.self),
+                guard let selectedItem, let data = try? await selectedItem.loadTransferable(type: Data.self),
                       let image = UIImage(data: data)
                 else { return }
                 
@@ -166,7 +183,7 @@ struct ContentView: View {
             patternElementSideSize = CGFloat(defaultPatternElementSideSize)
         }
         .onChange(of: isEditingGridSize, { _, newValue in
-            guard !newValue else { return }
+            guard !newValue, defaultPatternElementSideSize != Int(patternElementSideSize) else { return }
             defaultPatternElementSideSize = Int(patternElementSideSize)
         })
         .background(Color.background)
